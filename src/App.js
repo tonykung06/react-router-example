@@ -3,7 +3,31 @@ import {Router, Route, Link, Redirect, IndexRoute, browserHistory, hashHistory} 
 
 const DefaultComponent = () => <div>no sub-route, this is Index Route</div>;
 
-const Home = (props) => <div><h1>Home</h1><Links /></div>;
+// const Home = () => <div><h1>Home</h1><Links /></div>;
+class Home extends React.Component {
+	componentWillMount() {
+		this.context.router.setRouteLeaveHook(this.props.route, this.routerWillLeave);
+	}
+
+	routerWillLeave(nextLocation) {
+		//this will auto give a prompt confirmation
+		return `leaving home for ${nextLocation.pathname}`;
+	}
+
+	render() {
+		return (
+			<div>
+				<h1>Home</h1>
+				<Links />
+			</div>
+		);
+	}
+}
+
+Home.contextTypes = {
+	router: React.PropTypes.object.isRequired
+};
+
 const HomeBody = () => <div><h1>the is the content of Home</h1></div>;
 const About = (props) => <div><h1>About</h1>{props.children}</div>;
 const AboutBody = (props) => <div><h1>This is the about content</h1>{props.children}</div>;
