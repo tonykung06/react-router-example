@@ -1,9 +1,11 @@
 import React from 'react';
-import {Router, Route, Link, browserHistory, hashHistory} from 'react-router';
+import {Router, Route, Link, IndexRoute, browserHistory, hashHistory} from 'react-router';
+
+const DefaultComponent = () => <div>no sub-route, this is Index Route</div>;
 
 const Home = (props) => <div><h1>Home</h1><Links />{props.children}</div>;
 const About = (props) => <div><h1>About</h1>{props.children}</div>;
-const Contact = () => <div><h1>Contact</h1></div>;
+const Contact = (props) => <div><h1>Contact</h1></div>;
 
 const Links = () => (
 	<nav>
@@ -20,6 +22,7 @@ class App extends React.Component {
 			<Router history={hashHistory}>
 				<Route path="/" component={Home}>
 					<Route path="about" component={About}>
+						<IndexRoute component={DefaultComponent} />
 						<Route path="contact" component={Contact} />
 					</Route>
 				</Route>
