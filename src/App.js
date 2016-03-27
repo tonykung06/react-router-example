@@ -20,11 +20,20 @@ const Links = () => (
 		<Link activeClassName="active-nav-link" activeStyle={{
 			color: 'green'
 		}} to="/about/contact">Contact</Link>
+		<Link activeClassName="active-nav-link" activeStyle={{
+			color: 'green'
+		}} to={{
+			pathname: '/',
+			query: {
+				message: 'testing query string'
+			}
+		}}>testing route with query string</Link>
 	</nav>
 );
 
 const Container = (props) => (
 	<div>
+		{props.location.query.message}
 		{props.header}
 		{props.body}
 		<h2>Nested Route Contents</h2>
