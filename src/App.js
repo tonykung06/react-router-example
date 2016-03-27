@@ -1,5 +1,5 @@
 import React from 'react';
-import {Router, Route, Link, IndexRoute, browserHistory, hashHistory} from 'react-router';
+import {Router, Route, Link, Redirect, IndexRoute, browserHistory, hashHistory} from 'react-router';
 
 const DefaultComponent = () => <div>no sub-route, this is Index Route</div>;
 
@@ -19,7 +19,11 @@ const Links = () => (
 		}} to="/about">About</Link>
 		<Link activeClassName="active-nav-link" activeStyle={{
 			color: 'green'
+		}} to="/old-about">Old About</Link>
+		<Link activeClassName="active-nav-link" activeStyle={{
+			color: 'green'
 		}} to="/about/contact">Contact</Link>
+
 		<Link activeClassName="active-nav-link" activeStyle={{
 			color: 'green'
 		}} to={{
@@ -61,6 +65,7 @@ class App extends React.Component {
 							<IndexRoute component={DefaultComponent} />
 						</Route>
 					</Route>
+					<Redirect from="old-about" to="about" />
 				</Route>
 			</Router>
 		);
